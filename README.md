@@ -1,4 +1,4 @@
-##TENTS AND TREES##
+## TENTS AND TREES ##
 
 This is a solver for the Android application Tents and Trees Puzzles.
 
