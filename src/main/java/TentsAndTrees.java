@@ -10,9 +10,7 @@ public class TentsAndTrees {
 
     public static void main(String[] args) {
         Board board = BoardReader.readBoard("res/test.txt");
-        System.out.println(board);
         OpenSpace.run(board);
-        System.out.println(board);
         try {
             while (true) {
                 if (!RowsAndColumnsStage.run(board)) {
@@ -20,7 +18,6 @@ public class TentsAndTrees {
                 }
             }
         } catch (InvalidBoardStateException e) {
-            System.out.println(board);
             e.printStackTrace();
         }
         System.out.println(board);
