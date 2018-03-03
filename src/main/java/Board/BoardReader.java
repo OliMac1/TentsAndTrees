@@ -1,16 +1,21 @@
 package main.java.Board;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class BoardReader {
 
-    public static Board readBoard(String path){
+    public static Board readBoard(File file) throws IOException {
+        String content = new String(Files.readAllBytes(Paths.get(file.toURI())));
+        return readBoard(content);
+    }
+
+    public static Board readBoard(String file){
         int[] topLine = null, sideLine = null;
         ArrayList<Pair> trees = new ArrayList<>();
-        try(BufferedReader reader = new BufferedReader(new FileReader(path))){
+        try(BufferedReader reader = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(file.getBytes())))){
             topLine = stringToIntArray(reader.readLine());
             sideLine = stringToIntArray(reader.readLine());
             String line = reader.readLine();
