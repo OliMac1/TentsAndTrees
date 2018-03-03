@@ -103,11 +103,4 @@ public class ImpliesGrassStage {
             temp[i+1] = true;
         }
     }
-
-    public static void main(String[] args) {
-        boolean[] mask = new boolean[]{false, false, false,false, false};
-        boolean[] temp = implyGrass(mask,2,0);
-        System.out.println(Arrays.toString(temp));
-    }
-
 }
