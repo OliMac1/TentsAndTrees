@@ -3,6 +3,7 @@ package main.java;
 import main.java.Board.Board;
 import main.java.Board.BoardReader;
 import main.java.Board.InvalidBoardStateException;
+import main.java.Stages.ImpliesGrassStage;
 import main.java.Stages.OpenSpace;
 import main.java.Stages.RowsAndColumnsStage;
 
@@ -14,7 +15,9 @@ public class TentsAndTrees {
         try {
             while (true) {
                 if (!RowsAndColumnsStage.run(board)) {
-                    break;
+                    if(!ImpliesGrassStage.run(board)){
+                        break;
+                    }
                 }
             }
         } catch (InvalidBoardStateException e) {
