@@ -7,10 +7,13 @@ import main.java.Stages.ImpliesGrassStage;
 import main.java.Stages.OpenSpace;
 import main.java.Stages.RowsAndColumnsStage;
 
+import java.io.File;
+import java.io.IOException;
+
 public class TentsAndTrees {
 
-    public static void main(String[] args) {
-        Board board = BoardReader.readBoard("res/test.txt");
+    public static void main(String[] args) throws IOException {
+        Board board = BoardReader.readBoard(new File("res/test.txt"));
         OpenSpace.run(board);
         try {
             while (true) {
