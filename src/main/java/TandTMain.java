@@ -15,7 +15,7 @@ public class TandTMain extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws IOException {
+    public void start(Stage primaryStage) throws IOException, InterruptedException {
         Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
 
         Scene scene = new Scene(root, 1000, 800);
@@ -23,5 +23,7 @@ public class TandTMain extends Application {
         primaryStage.setTitle("Tents and Trees Solver");
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        new TentsAndTrees().start();
     }
 }

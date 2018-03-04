@@ -10,22 +10,24 @@ import main.java.Stages.RowsAndColumnsStage;
 import java.io.File;
 import java.io.IOException;
 
-public class TentsAndTrees {
+public class TentsAndTrees extends Thread{
 
-    public static void main(String[] args) throws IOException {
-        Board board = BoardReader.readBoard(new File("res/test.txt"));
-        OpenSpace.run(board);
+    public void run(){
         try {
-            while (true) {
-                if (!RowsAndColumnsStage.run(board)) {
-                    if(!ImpliesGrassStage.run(board)){
-                        break;
+            Board board = BoardReader.readBoard(new File("res/test.txt"));
+            OpenSpace.run(board);
+            try {
+                while (true) {
+                    if (!RowsAndColumnsStage.run(board)) {
+                        if (!ImpliesGrassStage.run(board)) {
+                            break;
+                        }
                     }
                 }
+            } catch (InvalidBoardStateException e) {
+                e.printStackTrace();
             }
-        } catch (InvalidBoardStateException e) {
-            e.printStackTrace();
-        }
-        System.out.println(board);
+            System.out.println(board);
+        }catch (IOException e){}
     }
 }
