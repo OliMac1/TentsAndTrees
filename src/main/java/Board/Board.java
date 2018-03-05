@@ -14,8 +14,10 @@ public class Board {
         WIDTH = topNumbers.length;
         HEIGHT = sideNumbers.length;
         board = generateEmptyBoard(WIDTH, HEIGHT);
-        for(Pair p : treePositions){
-            pSetTile(p.getA(), p.getB(), Tile.TREE);
+        if(treePositions != null) {
+            for (Pair p : treePositions) {
+                pSetTile(p.getA(), p.getB(), Tile.TREE);
+            }
         }
     }
 
