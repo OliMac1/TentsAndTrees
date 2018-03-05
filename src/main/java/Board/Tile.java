@@ -5,7 +5,8 @@ public enum Tile {
     EMPTY(0),
     GRASS(1),
     TENT(1),
-    TREE(2);
+    TREE(2),
+    RESERVED_TREE(3);
 
     public final int PRIORITY;
 
@@ -18,6 +19,7 @@ public enum Tile {
         switch(this) {
             case TENT:
                 return "^";
+            case RESERVED_TREE:
             case TREE:
                 return "T";
             case GRASS:
