@@ -15,8 +15,6 @@ import main.java.Board.BoardReader;
 import main.java.Board.ModifiableBoard;
 import main.java.Board.Tile;
 
-import java.io.IOException;
-
 public class MainController {
 
     private GraphicsContext gc;
@@ -30,8 +28,8 @@ public class MainController {
     private boolean modifiable = true, resettable = true;
 
 
-    public MainController() throws IOException {
-        modifiableBoard = new ModifiableBoard(9,9);
+    public MainController(){
+        modifiableBoard = new ModifiableBoard(5,5);
     }
 
     public void initialize(){
@@ -47,7 +45,7 @@ public class MainController {
         tileWidth = (canvas.getWidth()-2*offset)/(board.WIDTH + 1);
         tileHeight = (canvas.getHeight()-2*offset)/(board.HEIGHT + 1);
 
-        gc.setFont(new Font(800/(board.HEIGHT+1)));
+        gc.setFont(new Font(750/(board.HEIGHT+1)));
         gc.setTextBaseline(VPos.TOP);
 
         drawBackground(board);
@@ -111,7 +109,7 @@ public class MainController {
     }
 
     private void drawNumber(int x, int y, Integer num){
-        gc.fillText(num.toString(),(x)*tileWidth + offset + (tileWidth *0.5) , (y)*tileHeight + offset - 10, tileWidth);
+        gc.fillText(num.toString(),(x)*tileWidth + offset + (tileWidth *0.5) , (y)*tileHeight + offset - 15, tileWidth);
     }
 
     private void replaceSpace(int x, int y){
