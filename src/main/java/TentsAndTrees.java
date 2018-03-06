@@ -13,29 +13,38 @@ import java.io.IOException;
 
 public class TentsAndTrees extends Thread{
 
+    private MainController controller;
     private Board board;
 
     public void giveBoard(Board board){
         this.board = board;
     }
 
+    public void giveController(MainController controller){
+        this.controller = controller;
+    }
+
     public void run(){
-        OpenSpace.run(board);
         try {
-            while (true) {
-                if (!RowsAndColumnsStage.run(board)) {
-                    if (!ImpliesGrassStage.run(board)) {
-                        if(!ReserveTreeStage.run(board)) {
-                            if(!OpenSpace.run(board)) {
-                                break;
+            OpenSpace.run(board);
+            try {
+                while (true) {
+                    if (!RowsAndColumnsStage.run(board)) {
+                        if (!ImpliesGrassStage.run(board)) {
+                            if (!ReserveTreeStage.run(board)) {
+                                if (!OpenSpace.run(board)) {
+                                    break;
+                                }
                             }
                         }
                     }
                 }
+            } catch (InvalidBoardStateException e) {
+                e.printStackTrace();
             }
-        } catch (InvalidBoardStateException e) {
-            e.printStackTrace();
+            System.out.println(board);
+        }finally {
+            controller.finishedCalculation();
         }
-        System.out.println(board);
     }
 }

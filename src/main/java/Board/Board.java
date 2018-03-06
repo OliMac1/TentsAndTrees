@@ -4,8 +4,8 @@ import java.util.List;
 
 public class Board {
 
-    private Tile[][] board;
-    private int[] topNumbers, sideNumbers;
+    protected Tile[][] board;
+    protected int[] topNumbers, sideNumbers;
     public final int WIDTH, HEIGHT;
 
     public Board(int[] topNumbers, int[] sideNumbers, List<Pair> treePositions){
