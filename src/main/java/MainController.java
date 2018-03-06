@@ -1,11 +1,14 @@
 package main.java;
 
 import javafx.fxml.FXML;
+import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.TextAlignment;
 import main.java.Board.Board;
 import main.java.Board.BoardReader;
 import main.java.Board.ModifiableBoard;
@@ -25,12 +28,13 @@ public class MainController {
     private boolean modifiable = true;
 
     public MainController() throws IOException {
-        modifiableBoard = new ModifiableBoard(5,5);
+        modifiableBoard = new ModifiableBoard(9,9);
         board = BoardReader.readBoard(new File("res/test.txt"));
     }
 
     public void initialize(){
         gc = canvas.getGraphicsContext2D();
+        gc.setTextAlign(TextAlignment.CENTER);
 
         drawBoard();
     }
@@ -40,7 +44,17 @@ public class MainController {
         Board board = modifiable ? modifiableBoard : this.board;
         tileWidth = (canvas.getWidth()-2*offset)/(board.WIDTH + 1);
         tileHeight = (canvas.getHeight()-2*offset)/(board.HEIGHT + 1);
+
+        gc.setFont(new Font(800/(board.HEIGHT+1)));
+        gc.setTextBaseline(VPos.TOP);
+
         drawBackground(board);
+        for(int i = 0; i < board.HEIGHT; i++) {
+            drawRowNumber(i, board.getRowNumber(i));
+        }
+        for(int i = 0; i < board.WIDTH; i++) {
+            drawColumnNumber(i, board.getColumnNumber(i));
+        }
         for(int i = 0; i < board.WIDTH; i++){
             for(int j = 0; j < board.HEIGHT; j++){
                 switch(board.get(i,j)){
@@ -86,6 +100,18 @@ public class MainController {
         gc.fillRect(offset+tileWidth, offset+tileHeight, tileWidth*board.WIDTH, tileHeight*board.HEIGHT);
     }
 
+    private void drawRowNumber(int row, int num){
+        drawNumber(0, row + 1, num);
+    }
+
+    private void drawColumnNumber(int col, int num){
+        drawNumber(col +1,  0, num);
+    }
+
+    private void drawNumber(int x, int y, Integer num){
+        gc.fillText(num.toString(),(x)*tileWidth + offset + (tileWidth *0.5) , (y)*tileHeight + offset - 10, tileWidth);
+    }
+
     private void replaceSpace(int x, int y){
         gc.fillRect((x+1)*tileWidth + offset + 1.5, (y+1)*tileHeight + offset + 1.5,tileWidth - 3,tileHeight - 3);
     }
@@ -96,12 +122,24 @@ public class MainController {
         if(event.getButton() == MouseButton.PRIMARY && modifiable){
             int x = (int)((xCoord - offset)/tileWidth)-1;
             int y = (int)((yCoord - offset)/tileHeight)-1;
-            modifiableBoard.setTile(x,y, Tile.TREE);
+            if(x == -1){
+                modifiableBoard.incrementRowNumber(y);
+            } else if(y == -1){
+                modifiableBoard.incrementColumnNumber(x);
+            } else {
+                modifiableBoard.setTile(x, y, Tile.TREE);
+            }
             drawBoard();
-        }else if(event.getButton() == MouseButton.SECONDARY && modifiable){
-            int x = (int)((xCoord - offset)/tileWidth)-1;
-            int y = (int)((yCoord - offset)/tileHeight)-1;
-            modifiableBoard.setTile(x,y, Tile.EMPTY);
+        }else if(event.getButton() == MouseButton.SECONDARY && modifiable) {
+            int x = (int) ((xCoord - offset) / tileWidth) - 1;
+            int y = (int) ((yCoord - offset) / tileHeight) - 1;
+            if (x == -1) {
+                modifiableBoard.decrementRowNumber(y);
+            } else if (y == -1) {
+                modifiableBoard.decrementColumnNumber(x);
+            } else {
+                modifiableBoard.setTile(x, y, Tile.EMPTY);
+            }
             drawBoard();
         }
     }

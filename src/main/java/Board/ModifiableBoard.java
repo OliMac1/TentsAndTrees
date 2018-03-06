@@ -31,11 +31,46 @@ public class ModifiableBoard extends Board{
         }
         sb.append(Arrays.toString(topNumbers).replaceAll("\\s|\\[|\\]", ""));
         sb.append("\n");
-        sb.append(Arrays.toString(topNumbers).replaceAll("\\s|\\[|\\]", ""));
+        sb.append(Arrays.toString(sideNumbers).replaceAll("\\s|\\[|\\]", ""));
         for(Pair p : trees) {
             sb.append("\n");
             sb.append(String.format("%d,%d", p.getA(), p.getB()));
         }
         return sb.toString();
     }
+
+    public void incrementRowNumber(int row){
+        if(row < 0 || row >= HEIGHT){
+            return;
+        }
+        sideNumbers[row] = (sideNumbers[row]+1)%HEIGHT;
+    }
+
+    public void decrementRowNumber(int row){
+        if(row < 0 || row >= HEIGHT){
+            return;
+        }
+        sideNumbers[row] -= 1;
+        if(sideNumbers[row] < 0){
+            sideNumbers[row] += HEIGHT;
+        }
+    }
+
+    public void incrementColumnNumber(int col){
+        if(col < 0 || col >= WIDTH){
+            return;
+        }
+        topNumbers[col] = (topNumbers[col]+1)%WIDTH;
+    }
+
+    public void decrementColumnNumber(int col){
+        if(col < 0 || col >= WIDTH){
+            return;
+        }
+        topNumbers[col] -= 1;
+        if(topNumbers[col] < 0){
+            topNumbers[col] += WIDTH;
+        }
+    }
+
 }
