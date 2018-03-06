@@ -43,7 +43,7 @@ public class ModifiableBoard extends Board{
         if(row < 0 || row >= HEIGHT){
             return;
         }
-        sideNumbers[row] = (sideNumbers[row]+1)%HEIGHT;
+        sideNumbers[row] = (sideNumbers[row]+1)%(1 + (WIDTH + 1)/2);
     }
 
     public void decrementRowNumber(int row){
@@ -52,7 +52,7 @@ public class ModifiableBoard extends Board{
         }
         sideNumbers[row] -= 1;
         if(sideNumbers[row] < 0){
-            sideNumbers[row] += HEIGHT;
+            sideNumbers[row] += 1 + (WIDTH + 1)/2;
         }
     }
 
@@ -60,7 +60,7 @@ public class ModifiableBoard extends Board{
         if(col < 0 || col >= WIDTH){
             return;
         }
-        topNumbers[col] = (topNumbers[col]+1)%WIDTH;
+        topNumbers[col] = (topNumbers[col]+1)%(1 + (HEIGHT + 1)/2);
     }
 
     public void decrementColumnNumber(int col){
@@ -69,7 +69,7 @@ public class ModifiableBoard extends Board{
         }
         topNumbers[col] -= 1;
         if(topNumbers[col] < 0){
-            topNumbers[col] += WIDTH;
+            topNumbers[col] += 1 + (HEIGHT + 1)/2;
         }
     }
 
