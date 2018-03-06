@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.VPos;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Spinner;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -14,22 +15,23 @@ import main.java.Board.BoardReader;
 import main.java.Board.ModifiableBoard;
 import main.java.Board.Tile;
 
-import java.io.File;
 import java.io.IOException;
 
 public class MainController {
 
     private GraphicsContext gc;
     @FXML private Canvas canvas;
+    @FXML private Spinner<Integer> widthSpinner, heightSpinner;
+
     private double tileWidth, tileHeight;
     private double offset = 20;
     private Board board;
     private ModifiableBoard modifiableBoard;
-    private boolean modifiable = true;
+    private boolean modifiable = true, resettable = true;
+
 
     public MainController() throws IOException {
         modifiableBoard = new ModifiableBoard(9,9);
-        board = BoardReader.readBoard(new File("res/test.txt"));
     }
 
     public void initialize(){
@@ -144,9 +146,20 @@ public class MainController {
         }
     }
 
+    @FXML private void resetButton(){
+        if(resettable){
+            int x = widthSpinner.getValue();
+            int y = heightSpinner.getValue();
+            modifiableBoard = new ModifiableBoard(x,y);
+            modifiable = true;
+            drawBoard();
+        }
+    }
+
     @FXML private void runButton(){
         if(modifiable){
             modifiable = false;
+            resettable = false;
             board = BoardReader.readBoard(modifiableBoard.toString());
             TentsAndTrees tAndT = new TentsAndTrees();
             tAndT.giveBoard(board);
@@ -157,6 +170,7 @@ public class MainController {
 
     public void finishedCalculation(){
         drawBoard();
+        resettable = true;
     }
 
 }

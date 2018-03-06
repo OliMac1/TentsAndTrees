@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.canvas.Canvas?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <SplitPane dividerPositions="0.2" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="800" minWidth="1000" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.MainController">
     <Canvas fx:id="canvas" height="800.0" onMouseClicked="#clicked" width="800.0" />
     <AnchorPane prefHeight="200.0" prefWidth="200.0">
       <children>
-         <Button layoutX="95.0" layoutY="745.0" mnemonicParsing="false" onAction="#runButton" prefHeight="27.0" prefWidth="80.0" text="Run" />
+          <Button layoutX="100.0" layoutY="745.0" mnemonicParsing="false" onAction="#runButton" prefHeight="27.0" prefWidth="80.0" text="Run" />
+          <Button layoutX="100.0" layoutY="120.0" mnemonicParsing="false" onAction="#resetButton" prefHeight="27.0" prefWidth="80.0" text="Reset" />
+          <Spinner fx:id="widthSpinner" layoutX="12.0" layoutY="30.0">
+             <valueFactory>
+                 <SpinnerValueFactory.IntegerSpinnerValueFactory max="18" min="5" />
+             </valueFactory>
+          </Spinner>
+          <Spinner fx:id="heightSpinner" layoutX="12.0" layoutY="76.0">
+             <valueFactory>
+                 <SpinnerValueFactory.IntegerSpinnerValueFactory max="18" min="5" />
+             </valueFactory>
+          </Spinner>
       </children></AnchorPane>
 </SplitPane>
