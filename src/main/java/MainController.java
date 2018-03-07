@@ -105,11 +105,11 @@ public class MainController {
     }
 
     private void drawColumnNumber(int col, int num){
-        drawNumber(col +1,  0, num);
+        drawNumber(col + 1,  0, num);
     }
 
     private void drawNumber(int x, int y, Integer num){
-        gc.fillText(num.toString(),(x)*tileWidth + offset + (tileWidth *0.5) , (y+0.5)*tileHeight + offset, tileWidth);
+        gc.fillText(num.toString(),(x+0.5)*tileWidth + offset, (y+0.5)*tileHeight + offset);
     }
 
     private void replaceSpace(int x, int y){
