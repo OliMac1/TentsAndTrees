@@ -2,10 +2,7 @@ package main.java;
 
 import main.java.Board.Board;
 import main.java.Board.InvalidBoardStateException;
-import main.java.Stages.ImpliesGrassStage;
-import main.java.Stages.OpenSpace;
-import main.java.Stages.ReserveTreeStage;
-import main.java.Stages.RowsAndColumnsStage;
+import main.java.Stages.*;
 
 public class TentsAndTrees extends Thread{
 
@@ -29,7 +26,9 @@ public class TentsAndTrees extends Thread{
                         if (!ImpliesGrassStage.run(board)) {
                             if (!ReserveTreeStage.run(board)) {
                                 if (!OpenSpace.run(board)) {
-                                    break;
+                                    if(!TreeLastSpaceStage.run(board)){
+                                        break;
+                                    }
                                 }
                             }
                         }

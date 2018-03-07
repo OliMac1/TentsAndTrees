@@ -73,7 +73,7 @@ public class Board {
 
     public Tile get(int i, int j) {
         if(i < 0 || i >= WIDTH || j < 0 || j >= HEIGHT){
-            return Tile.EMPTY;
+            return Tile.OFF_BOARD;
         }
         return board[i][j];
     }

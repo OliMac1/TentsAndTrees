@@ -2,6 +2,7 @@ package main.java.Board;
 
 public enum Tile {
 
+    OFF_BOARD(-1),
     EMPTY(0),
     GRASS(1),
     TENT(1),
