@@ -45,8 +45,8 @@ public class MainController {
         tileWidth = (canvas.getWidth()-2*offset)/(board.WIDTH + 1);
         tileHeight = (canvas.getHeight()-2*offset)/(board.HEIGHT + 1);
 
-        gc.setFont(new Font(750/(board.HEIGHT+1)));
-        gc.setTextBaseline(VPos.TOP);
+        gc.setFont(new Font(((canvas.getHeight()-2*offset)/(board.HEIGHT+1))-5 ));
+        gc.setTextBaseline(VPos.CENTER);
 
         drawBackground(board);
         for(int i = 0; i < board.HEIGHT; i++) {
@@ -109,7 +109,7 @@ public class MainController {
     }
 
     private void drawNumber(int x, int y, Integer num){
-        gc.fillText(num.toString(),(x)*tileWidth + offset + (tileWidth *0.5) , (y)*tileHeight + offset - 15, tileWidth);
+        gc.fillText(num.toString(),(x)*tileWidth + offset + (tileWidth *0.5) , (y+0.5)*tileHeight + offset, tileWidth);
     }
 
     private void replaceSpace(int x, int y){
